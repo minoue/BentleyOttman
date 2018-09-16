@@ -19,8 +19,8 @@ int test() {
 
     std::string dataPathA = "./testData/DataA-Table_1.csv";
     std::string dataPathB = "./testData/DataB-Table_1.csv";
-    std::vector<std::vector<std::string>> v1 = TestDataSet::getDataSet(dataPathA);
-    std::vector<std::vector<std::string>> v2 = TestDataSet::getDataSet(dataPathB);
+    std::vector<std::vector<std::string> > v1 = TestDataSet::getDataSet(dataPathA);
+    std::vector<std::vector<std::string> > v2 = TestDataSet::getDataSet(dataPathB);
 
     for (size_t i = 0; i < v1.size(); i++) {
         int indexA = std::stoi(v1[i][0]);

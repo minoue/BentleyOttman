@@ -11,7 +11,7 @@
 
 class TestDataSet {
 public:
-    static std::vector<std::vector<std::string>> getDataSet(std::string path);
+    static std::vector<std::vector<std::string> > getDataSet(std::string path);
 };
 
 #endif /* dataSet_hpp */
