@@ -66,9 +66,6 @@ int test() {
     BentleyOttman checker(edgeVec, "lineGroupA");
     BentleyOttman checker2(edgeVec2, "lineGroupB");
 
-    std::cout << checker.edges.size() << std::endl;
-    std::cout << checker2.edges.size() << std::endl;
-
     BentleyOttman checker3 = checker + checker2;
     checker3.check();
 

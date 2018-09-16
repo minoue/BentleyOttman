@@ -50,11 +50,8 @@ bool LineSegment::operator*(const LineSegment& rhs) const
         v2.normalize();
         float dot = v1 * v2;
         if (dot == 1 || dot == 0) {
-            // std::cout << "not nai bun ten" << std::endl;
             return false;
         } else {
-            // std::cout << "内！分！点！" << std::endl;
-            
             return true;
         }
     }
@@ -66,7 +63,6 @@ bool LineSegment::operator*(const LineSegment& rhs) const
     bool ccw2 = Utils::sameSigns(t3, t4);
 
     if (ccw1 == false && ccw2 == false) {
-        // std::cout << "is crossing" << std::endl;
         return true;
     } else {
         return false;
