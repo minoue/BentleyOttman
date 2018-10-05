@@ -108,7 +108,7 @@ void BentleyOttman::check()
 bool BentleyOttman::doBegin(Event& ev)
 {
     LineSegment& currentEdge = ev.edge;
-    statusQueue.push_back(currentEdge);
+    statusQueue.emplace_back(currentEdge);
 
     if (statusQueue.size() == 1) {
         // If only one edge is in the statusQueue, just continue...
@@ -142,8 +142,8 @@ bool BentleyOttman::doBegin(Event& ev)
 
         LineSegment& line2 = statusQueue[index + 1];
         if (*foundIter * line2) {
-            result.push_back(*foundIter);
-            result.push_back(line2);
+            result.emplace_back(*foundIter);
+            result.emplace_back(line2);
             createNewEvent(currentEdge, line2);
         }
 
@@ -152,21 +152,21 @@ bool BentleyOttman::doBegin(Event& ev)
 
         LineSegment& line2 = statusQueue[index - 1];
         if (*foundIter * line2) {
-            result.push_back(*foundIter);
-            result.push_back(line2);
+            result.emplace_back(*foundIter);
+            result.emplace_back(line2);
             createNewEvent(currentEdge, line2);
         }
     } else {
         LineSegment& nextEdge = statusQueue[index + 1];
         LineSegment& previousEdge = statusQueue[index - 1];
         if (*foundIter * nextEdge) {
-            result.push_back(*foundIter);
-            result.push_back(nextEdge);
+            result.emplace_back(*foundIter);
+            result.emplace_back(nextEdge);
             createNewEvent(currentEdge, nextEdge);
         }
         if (*foundIter * previousEdge) {
-            result.push_back(*foundIter);
-            result.push_back(previousEdge);
+            result.emplace_back(*foundIter);
+            result.emplace_back(previousEdge);
             createNewEvent(currentEdge, previousEdge);
         }
     }
@@ -199,8 +199,8 @@ bool BentleyOttman::doEnd(Event& ev)
         bool isCrossing = nextEdge * previousEdge;
         if (isCrossing) {
 
-            result.push_back(nextEdge);
-            result.push_back(previousEdge);
+            result.emplace_back(nextEdge);
+            result.emplace_back(previousEdge);
             createNewEvent(nextEdge, previousEdge);
         }
     }
@@ -252,8 +252,8 @@ bool BentleyOttman::doCross(Event& ev)
         LineSegment& lineB = statusQueue[big + 1];
         bool isCrossing = lineA * lineB;
         if (isCrossing) {
-            result.push_back(lineA);
-            result.push_back(lineB);
+            result.emplace_back(lineA);
+            result.emplace_back(lineB);
             createNewEvent(lineA, lineB);
         }
 
@@ -264,8 +264,8 @@ bool BentleyOttman::doCross(Event& ev)
         LineSegment& lineB = statusQueue[big];
         bool isCrossing = lineA * lineB;
         if (isCrossing) {
-            result.push_back(lineA);
-            result.push_back(lineB);
+            result.emplace_back(lineA);
+            result.emplace_back(lineB);
             createNewEvent(lineA, lineB);
         }
     } else {
@@ -274,8 +274,8 @@ bool BentleyOttman::doCross(Event& ev)
         LineSegment& lineB = statusQueue[big];
         bool isCrossing = lineA * lineB;
         if (isCrossing) {
-            result.push_back(lineA);
-            result.push_back(lineB);
+            result.emplace_back(lineA);
+            result.emplace_back(lineB);
             createNewEvent(lineA, lineB);
         }
 
@@ -284,8 +284,8 @@ bool BentleyOttman::doCross(Event& ev)
         LineSegment& lineD = statusQueue[big + 1];
         isCrossing = lineC * lineD;
         if (isCrossing) {
-            result.push_back(lineC);
-            result.push_back(lineD);
+            result.emplace_back(lineC);
+            result.emplace_back(lineD);
             createNewEvent(lineA, lineB);
         }
     }
