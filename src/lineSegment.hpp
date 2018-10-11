@@ -34,12 +34,12 @@ public:
 
 class EdgeCrossingComparator {
 public:
-    bool operator()(const LineSegment& left, const LineSegment& right) const
+    bool operator()(const LineSegment* left, const LineSegment* right) const
     {
-        if (left.crossingPointY == right.crossingPointY) {
-            return left.end.y < right.end.y;
+        if (left->crossingPointY == right->crossingPointY) {
+            return left->end.y < right->end.y;
         } else {
-            return left.crossingPointY < right.crossingPointY;
+            return left->crossingPointY < right->crossingPointY;
         }
     }
 };

@@ -16,12 +16,13 @@
 class BentleyOttman {
 public:
     BentleyOttman();
-    BentleyOttman(std::vector<LineSegment> edgeVector);
-    BentleyOttman(std::vector<LineSegment> edgeVector, std::string groupId);
+    explicit BentleyOttman(std::vector<LineSegment>& edgeVector);
+    BentleyOttman(std::vector<LineSegment>& edgeVector, std::string& groupId);
     ~BentleyOttman();
 
     void check();
     std::vector<LineSegment> result;
+    std::vector<LineSegment*> resultPtr;
     std::vector<LineSegment> edges;
     std::string groupId;
 
@@ -32,9 +33,10 @@ private:
     bool doBegin(Event& ev);
     bool doEnd(Event& ev);
     bool doCross(Event& ev);
-    void createNewEvent(LineSegment lineA, LineSegment lineB);
+    void createNewEvent(LineSegment* lineA, LineSegment* lineB);
     void assignGroupId();
     std::vector<LineSegment> statusQueue;
+    std::vector<LineSegment*> statusPtrQueue;
     std::multiset<Event> eventQueue;
 };
 

@@ -13,16 +13,16 @@
 class Event {
 public:
     Event();
-    Event(int eventType, LineSegment edge, Point2D point, int index);
-    Event(int eventType, LineSegment edge, LineSegment otherEdge, Point2D point, int index);
+    Event(int eventType, LineSegment* edgePtrA, Point2D point, int index);
+    Event(int eventType, LineSegment* edgePtrA, LineSegment* edgePtrB, Point2D point, int index);
     ~Event();
 
     Point2D eventPoint;
     int eventType;
     int index;
     float sweepline;
-    LineSegment edge;
-    LineSegment otherEdge;
+    LineSegment* edgePtrA;
+    LineSegment* edgePtrB;
 
     bool operator==(const Event& rhs) const;
     inline bool operator!=(const Event& rhs) const

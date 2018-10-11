@@ -12,6 +12,7 @@
 #include "point2D.hpp"
 #include "testData/dataSet.hpp"
 
+
 int test() {
 
     std::vector<LineSegment> edgeVec;
@@ -54,7 +55,6 @@ int test() {
         edgeVec2.push_back(edge);
     }
 
-    // return 0;
     // Remove duplicated line segments
     std::sort(edgeVec.begin(), edgeVec.end(), EdgeIndexComparator());
     edgeVec.erase(std::unique(edgeVec.begin(), edgeVec.end()), edgeVec.end());
@@ -63,15 +63,17 @@ int test() {
     edgeVec.erase(std::unique(edgeVec2.begin(), edgeVec2.end()), edgeVec2.end());
 
     // Name line group name if necessary
-    BentleyOttman checker(edgeVec, "lineGroupA");
-    BentleyOttman checker2(edgeVec2, "lineGroupB");
+    std::string groupNameA = "lineGroupA";
+    std::string groupNameB = "lineGroupB";
+    BentleyOttman checker(edgeVec, groupNameA);
+    BentleyOttman checker2(edgeVec2, groupNameB);
 
     BentleyOttman checker3 = checker + checker2;
     checker3.check();
 
-    std::vector<LineSegment>::iterator resultIter;
-    for (resultIter = checker3.result.begin(); resultIter != checker3.result.end(); ++resultIter) {
-        const LineSegment& line = *resultIter;
+    std::vector<LineSegment*>::iterator resultIter;
+    for (resultIter = checker3.resultPtr.begin(); resultIter != checker3.resultPtr.end(); ++resultIter) {
+        const LineSegment& line = *(*resultIter);
         std::cout << line.begin.index << ":" << line.end.index << " :: " << std::endl;
         std::cout << line.groupId << std::endl;
     }
@@ -81,5 +83,6 @@ int test() {
 int main(int argc, const char* argv[])
 {
     test();
+    std::cout << "end" << std::endl;
     return 0;
 }

@@ -9,22 +9,20 @@ Event::Event()
 {
 }
 
-Event::Event(int eventType, LineSegment edge, Point2D point, int index)
-{
+Event::Event(int eventType, LineSegment *edgePtrA, Point2D point, int index) {
     this->eventType = eventType;
+    this->edgePtrA = edgePtrA;
     this->eventPoint = point;
     this->index = index;
-    this->edge = edge;
     this->sweepline = point.x;
 }
 
-Event::Event(int eventType, LineSegment edge, LineSegment otherEdge, Point2D point, int index)
-{
+Event::Event(int eventType, LineSegment *edgePtrA, LineSegment *edgePtrB, Point2D point, int index) {
     this->eventType = eventType;
+    this->edgePtrA = edgePtrA;
+    this->edgePtrB = edgePtrB;
     this->eventPoint = point;
     this->index = index;
-    this->edge = edge;
-    this->otherEdge = otherEdge;
     this->sweepline = point.x;
 }
 
