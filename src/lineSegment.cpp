@@ -58,12 +58,17 @@ bool LineSegment::operator*(const LineSegment& rhs) const
 
     if (t1 == 0 && t2 == 0 && t3 == 0 && t4 == 0) {
         // Two lines are on a same line
+        // Check if there is an internal dividing point between two vectors
+        // e.g. *-----*  *-----* : Not intersecting.
+        //        *---*--*---*   : Intersection
         Vector2D v1 = rhs.end - this->begin;
         Vector2D v2 = rhs.begin - this->end;
         v1.normalize();
         v2.normalize();
         float dot = v1 * v2;
-        if (dot == 1 || dot == 0) {
+        if (dot >= 0) {
+            // Two vectors are pointing to same directions.
+            // No internal dividing point, so no intersecting.
             return false;
         } else {
             return true;
